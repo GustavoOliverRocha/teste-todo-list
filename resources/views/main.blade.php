@@ -9,11 +9,23 @@
 </head>
 <body>
 	<main>
-		@include('components.todoList.createForm.index')
-		@include('components.todoList.showLists.index')
+		@yield('content')
+
+		<!--@@pense em talvez quado vc clicar numa tarefa ela renderiza as tabelas no lado ja sem precisar atualizar
+		@@include('components.todoList.createForm.index')
+		@@include('components.todoList.showLists.index')
 		@@include('components.task.createForm.index')
 		@@include('components.task.showTasks.index')
+
+
+		
+		@@include('components.task.index')
+		@@include('components.todoList.index')-->
 		
 	</main>
+	<script 
+		type="text/javascript"
+		src="{{URL::asset('http://localhost/sistema-votacao/public/')}}js/jquery-3.6.0.min.js"></script>
+	@stack('scripts')
 </body>
 </html>

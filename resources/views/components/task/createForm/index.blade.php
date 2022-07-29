@@ -6,5 +6,5 @@
 	<input type="text" name="taskName" placeholder="task name...">
 	<button type="submit" class="btn btn-green">Create Task</button>
 </form>
-<h3 class="title">Concluidas 1 de 6</h3>
+<h3 class="title">Finished 1 of 6</h3>
 <button type="submit">Limpar todas as tarefas</button> 

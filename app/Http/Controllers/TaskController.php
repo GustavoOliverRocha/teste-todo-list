@@ -97,4 +97,18 @@ class TaskController extends Controller
             $task_id->delete();
         return redirect()->back();
     }
+
+    public function putStatus(Request $request)
+    {
+        $obj_task = Task::find($request->task_id);
+
+        if($obj_task->status === "finished")
+            $obj_task->status = 'To do';
+        else
+            $obj_task->status = 'finished';
+        //dd($obj_task->taskStatus);
+        $obj_task->save();
+
+        return redirect()->back();
+    }
 }

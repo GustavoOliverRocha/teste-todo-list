@@ -5,4 +5,5 @@
 @endsection
 @push('scripts')
 	@include('components.task.createForm.scriptsJs')
+	@include('components.task.showTasks.scriptsJs')
 @endpush

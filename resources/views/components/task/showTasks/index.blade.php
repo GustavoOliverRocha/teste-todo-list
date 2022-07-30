@@ -10,15 +10,26 @@
 		<tr>
 			<td>{{$t->id}}</td>
 			<td>{{$t->name}}</td>
-		@if($t->status === 'To do')
-			<td class="taskStatus" style="color: #474747;">
-				&#8414;
+			<td hidden>
+
 			</td>
-		@else
-			<td class="taskStatus" style="color: #00e676;">
-				&#10004;
+		
+			<td >
+				<form method="POST" action="{{route('task.status.edit')}}" name="formTaskStatus">
+					@csrf
+					@method('PUT')
+					<input type="hidden" name="task_id" value="{{$t->id}}">
+				@if($t->status === 'To do')
+					<button class="taskStatus" style="color: #474747;">...</button>
+				@else
+					<button class="taskStatus" style="color: #00e676;">&#10004;</button>
+				@endif
+				</form>
+				
 			</td>
-		@endif
+		
+
+		
 			<td>
 				<button class="btn btn-blue btn-small">Edit</button>
 			</td>

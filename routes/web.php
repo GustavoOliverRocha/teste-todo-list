@@ -42,6 +42,8 @@ Route::get('/list','App\Http\Controllers\TodoListController@show')
 Route::delete('/task/delete/{task_id}','App\Http\Controllers\TaskController@destroy')
 ->name('task.delete');
 
+Route::put('/task/edit/status','App\Http\Controllers\TaskController@putStatus')->name('task.status.edit');
+
 Route::post('/task/save/list/{list_id}','App\Http\Controllers\TaskController@store')
 ->name('task.save');
 

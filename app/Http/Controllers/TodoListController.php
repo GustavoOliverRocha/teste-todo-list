@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 class TodoListController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Exibição de todas as Listas
      */
     public function show()
     {
@@ -20,37 +18,24 @@ class TodoListController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createForm()
-    {
-        return view('todoList.pages.insertForm');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+   /**
+     * Inserção de uma lista
      */
     public function store(Request $request)
     {
         $obj_list = new TodoList();
         $obj_list->name = $request->listName;
         $obj_list->save();
-        return view('components.todoList.index',[
+       /* return view('components.todoList.index',[
             'todoLists' => $obj_list::all()
-        ]);
+        ]);*/
+        return redirect()->back();
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TodoList  $todoList
-     * @return \Illuminate\Http\Response
+     * Exibição das tarefas referente a um lista
+     * em especifico.
      */
     public function showTasks(TodoList $list_id)
     {
@@ -63,36 +48,21 @@ class TodoListController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TodoList  $todoList
-     * @return \Illuminate\Http\Response
+
+   /**
+     * Atualização de uma Lista
      */
-    public function edit(TodoList $todoList)
+    public function update(Request $request, TodoList $list_id)
     {
-        //
+        $list_id->name = $request->listName;
+        $list_id->save();
+        return redirect()->back();
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TodoList  $todoList
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TodoList $todoList)
-    {
-        $todoList->name = $request->listName;
-        $todoList->save();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TodoList  $todoList
-     * @return \Illuminate\Http\Response
-     */
+     * Remoção de uma lista
+     * 
+     * */
     public function destroy(TodoList $list_id)
     {
         if(isset($list_id->id))

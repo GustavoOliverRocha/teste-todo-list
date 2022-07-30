@@ -1,11 +1,13 @@
-<a href="{{route('list.showAll')}}"><<- Voltar para as listas</a>
+
+{{-- Formulario de Inserção de uma Tarefa --}}
+<a href="{{route('list.showAll')}}"><<- Go Back to Lists</a>
 	
 <h1 class="title">{{$todoList->name}}</h1>
 
-<form method="POST" action="" name="taskForm">
+<form method="POST" action="{{route('task.save',['list_id' => $todoList->id])}}" name="taskForm">
 	@csrf
-	<input type="text" name="taskName" placeholder="task name...">
+	<input type="text" class="insertInput" name="taskName" placeholder="task name...">
 	<button type="submit" class="btn btn-green">Create Task</button>
 </form>
-<h3 class="title">Finished 1 of 6</h3>
-<button type="submit">Limpar todas as tarefas</button> 
+<br>
+<br>

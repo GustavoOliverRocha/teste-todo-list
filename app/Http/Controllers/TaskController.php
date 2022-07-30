@@ -9,30 +9,7 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Inserção da Tarefa
      */
     public function store(Request $request,TodoList $list_id)
     {
@@ -40,56 +17,22 @@ class TaskController extends Controller
                 'name' => $request->taskName,
                 'status' => 'To do'
             ]);
-        $tasks = $list_id->tasks()
-        ->select('task.id','task.name','task.status')
-        ->get();
-        return view('components.task.index',[
-            'todoList' => $list_id,
-            'task' => $tasks
-        ]);
+        return redirect()->back();
     }
 
+
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * Update da Tarefa
      */
-    public function show(Task $task)
+    public function update(Request $request, Task $task_id)
     {
-        //
+        $task_id->name = $request->taskName;
+        $task_id->save();
+        return redirect()->back();
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Task $task)
-    {
-        $obj_task->name = $request->taskName;
-        $obj_task->status = $request->taskStatus;
-        $obj_task->save();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * Remoção da Tarefa
      */
     public function destroy(Task $task_id)
     {
@@ -98,6 +41,11 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
+
+    /**
+     * Alterando o estado da tarefa quando o
+     * usuario clicar
+     * */
     public function putStatus(Request $request)
     {
         $obj_task = Task::find($request->task_id);

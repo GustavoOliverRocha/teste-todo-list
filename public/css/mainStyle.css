@@ -78,8 +78,14 @@
 	.taskStatus:hover{
 		background-color: #999797;
 	}
-	input[type=text]{
+	.insertInput{
 		height: 25px;
 		width: 20%;
 		font-size: 16px;
+	}
+
+	.inputEdit{
+		width: 50%;
+		height: 20px;
+		font-size: 13px;
 	}

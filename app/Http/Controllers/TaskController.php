@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\TodoList;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -33,12 +34,19 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,TodoList $list_id)
     {
-        $obj_task = new Task();
-        $obj_task->name = $request->taskName;
-        $obj_task->status = 'To do';
-        $obj_task->save();
+        $list_id->tasks()->create([
+                'name' => $request->taskName,
+                'status' => 'To do'
+            ]);
+        $tasks = $list_id->tasks()
+        ->select('task.id','task.name','task.status')
+        ->get();
+        return view('components.task.index',[
+            'todoList' => $list_id,
+            'task' => $tasks
+        ]);
     }
 
     /**
@@ -83,9 +91,10 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task_id)
     {
-        if(isset($task->id))
-            $task->delete();
+        if(isset($task_id->id))
+            $task_id->delete();
+        return redirect()->back();
     }
 }

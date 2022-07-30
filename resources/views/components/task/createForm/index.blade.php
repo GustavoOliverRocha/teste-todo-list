@@ -1,8 +1,9 @@
-<a href=""><<- Voltar para as listas</a>
+<a href="{{route('list.showAll')}}"><<- Voltar para as listas</a>
 	
-<h1 class="title">Tarefas de Casa</h1>
+<h1 class="title">{{$todoList->name}}</h1>
 
-<form method="POST" action="@@{{route('task.save')}}">
+<form method="POST" action="" name="taskForm">
+	@csrf
 	<input type="text" name="taskName" placeholder="task name...">
 	<button type="submit" class="btn btn-green">Create Task</button>
 </form>

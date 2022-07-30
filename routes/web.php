@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('todoList.pages.showAll');
+    return view('components.todoList.showLists.index');
 });
 
 /**
@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::put('/list/update/{list_id}','App\Http\Controllers\TodoListController@update')
 ->name('list.edit');
 
-Route::get('/list/{list_id}','App\Http\Controllers\TodoListController@showTasks')
+Route::get('/list/tasks/{list_id}','App\Http\Controllers\TodoListController@showTasks')
 ->name('list.showTasks');
 
 Route::delete('/list/delete/{list_id}','App\Http\Controllers\TodoListController@destroy')
@@ -39,10 +39,10 @@ Route::get('/list','App\Http\Controllers\TodoListController@show')
  * Tasks Routes
  * */
 
-Route::delete('/task/delete/{list_id}','App\Http\Controllers\TaskController@destroy')
+Route::delete('/task/delete/{task_id}','App\Http\Controllers\TaskController@destroy')
 ->name('task.delete');
 
-Route::post('/task/save','App\Http\Controllers\TaskController@store')
+Route::post('/task/save/list/{list_id}','App\Http\Controllers\TaskController@store')
 ->name('task.save');
 
 

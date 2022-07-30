@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('status');
             
-            $table->foreignId('todoList_id')
+            $table->foreignId('todo_list_id')
                     ->constrained('todo_list')
                     ->references('id')
                     ->onUpdate('cascade')

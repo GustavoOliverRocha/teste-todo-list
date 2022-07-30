@@ -1,8 +1,8 @@
 <script type="text/javascript">
-	$('[name=listForm]').submit(function(event){
+	$('[name=taskForm]').submit(function(event){
 		event.preventDefault();
 		$.ajax({
-			url:"{{route('list.save')}}",
+			url:"{{route('task.save',['list_id' => $todoList->id])}}",
 			type: "POST",
 			data: $(this).serialize(),
 			success:(response)=>{

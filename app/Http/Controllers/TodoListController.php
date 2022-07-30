@@ -15,7 +15,7 @@ class TodoListController extends Controller
     public function show()
     {
         $lists = (new TodoList())::all();
-        return view('todoList.pages.showAll',[
+        return view('components.todoList.index',[
             'todoLists' => $lists
         ]);
     }
@@ -41,6 +41,9 @@ class TodoListController extends Controller
         $obj_list = new TodoList();
         $obj_list->name = $request->listName;
         $obj_list->save();
+        return view('components.todoList.index',[
+            'todoLists' => $obj_list::all()
+        ]);
     }
 
     /**
@@ -49,13 +52,13 @@ class TodoListController extends Controller
      * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function showTasks(TodoList $todoList)
+    public function showTasks(TodoList $list_id)
     {
-        /*$listTasks = $todoList->tasks()
-        ->select('task.name','task.status')
-        ->get();*/
-        $listTasks = $todoList->tasks()::all();
-        return view('todoList.pages.listTasks',[
+        $listTasks = $list_id->tasks()
+        ->select('task.id','task.name','task.status')
+        ->get();
+        return view('components.task.index',[
+            'todoList' => $list_id,
             'task' => $listTasks
         ]);
     }
@@ -90,9 +93,10 @@ class TodoListController extends Controller
      * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TodoList $todoList)
+    public function destroy(TodoList $list_id)
     {
-        if(isset($todoList->id))
-            $todoList->delete();
+        if(isset($list_id->id))
+            $list_id->delete();
+        return redirect()->route('list.showAll');
     }
 }
